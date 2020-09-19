@@ -6,9 +6,13 @@ const xhr = (method, url, data = null, cb) => {
     const doReject = (xhr) => {
       reject(xhr.response || xhr.statusText || defaultError);
     };
-    xhr.open(method, url);
+    xhr.open(method, url, true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhr.setRequestHeader('Access-Control-Allow-Credentials');
     xhr.timeout = 10000;
+    xhr.withCredentials = true;
     if (cb) cb(xhr);
     xhr.onload = () => {
       if (xhr.readyState === 4) {
