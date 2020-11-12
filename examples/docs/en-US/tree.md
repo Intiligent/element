@@ -65,6 +65,37 @@ Basic tree structure.
 ```
 :::
 
+### Empty slot
+
+Using slot for empty data.
+
+:::demo
+```html
+<el-tree :data="dataEmpty" :props="defaultProps" @node-click="handleNodeClick" empty-text="Текст заглушка">
+    <span slot="empty">Empty slot value или <code>empty-text</code></span>
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        dataEmpty: [],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Selectable
 
 Used for node selection.
@@ -864,3 +895,8 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | Name | Description |
 |------|--------|
 | — | Custom content for tree nodes. The scope parameter is { node, data } |
+
+### Slots
+| Name | Description |
+|------|--------|
+| empty | Custom content for empty data |
