@@ -1,45 +1,60 @@
 <template>
-  <li class="el-menu-item-group">
-    <div class="el-menu-item-group__title" :style="{paddingLeft: levelPadding + 'px'}">
-      <template v-if="!$slots.title">{{title}}</template>
-      <slot v-else name="title"></slot>
+<li class="el-menu-item-group">
+    <div class="el-menu-item-group__title" :class="'deep-' + levelDeep">
+        <template v-if="!$slots.title">{{title}}</template>
+        <slot v-else name="title"></slot>
     </div>
     <ul>
-      <slot></slot>
+        <slot></slot>
     </ul>
-  </li>
+</li>
 </template>
+
 <script>
-  export default {
+export default {
     name: 'ElMenuItemGroup',
 
     componentName: 'ElMenuItemGroup',
 
     inject: ['rootMenu'],
+
     props: {
-      title: {
-        type: String
-      }
+        title: {
+            type: String
+        }
     },
     data() {
-      return {
-        paddingLeft: 20
-      };
+        return {
+            paddingLeft: 20
+        };
     },
+    
     computed: {
-      levelPadding() {
-        let padding = 20;
-        let parent = this.$parent;
-        if (this.rootMenu.collapse) return 20;
-        while (parent && parent.$options.componentName !== 'ElMenu') {
-          if (parent.$options.componentName === 'ElSubmenu') {
-            padding += 20;
-          }
-          parent = parent.$parent;
-        }
-        return padding;
-      }
-    }
-  };
-</script>
+        // levelPadding() {
+        //     let padding = 20;
+        //     let parent = this.$parent;
+        //     if (this.rootMenu.collapse) return 20;
+        //     while (parent && parent.$options.componentName !== 'ElMenu') {
+        //         if (parent.$options.componentName === 'ElSubmenu') {
+        //             padding += 20;
+        //         }
+        //         parent = parent.$parent;
+        //     }
+        //     return padding;
+        // },
 
+        levelDeep() {
+            let deep = 0;
+            let parent = this.$parent;
+            if (this.rootMenu.collapse) return 1;
+            while (parent && parent.$options.componentName !== 'ElMenu') {
+                if (parent.$options.componentName === 'ElSubmenu') {
+                    deep += 1;
+                }
+                parent = parent.$parent;
+            }
+            return deep;
+        }
+    }
+};
+</script>

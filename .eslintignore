@@ -1,6 +1,12 @@
 src/utils/popper.js
 src/utils/date.js
-examples/play
+src/utils/*
+src/locale/*
+src/index.js
+build/*
+packages/*
+examples/*
+test/*
 *.sh
 node_modules
 lib

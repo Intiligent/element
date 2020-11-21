@@ -7,6 +7,11 @@
     "extends": "elemefe",
     "rules": {
         "indent": ["error", 4],
+        "space-before-function-paren": ["error", {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
         "no-restricted-globals": ["error", "event", "fdescribe"]
     },
     "parserOptions": {
