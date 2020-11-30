@@ -395,6 +395,10 @@
               "title": "InputNumber"
             },
             {
+              "path": "/icon-picker",
+              "title": "IconPicker"
+            },
+            {
               "path": "/select",
               "title": "Select"
             },

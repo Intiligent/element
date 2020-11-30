@@ -1,0 +1,42 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "./autocomplete.scss";
+
+@include b(icon-picker) {
+    .el-input-group__prepend {
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        width: $--input-medium-height;
+    }
+
+    .el-input--small {
+        .el-input-group__prepend {
+            width: $--input-small-height;
+        }
+    }
+
+    .el-input--mini {
+        .el-input-group__prepend {
+            width: $--input-mini-height;
+        }
+    }
+}
+
+@include b(icon-picker-popper) {
+    li {
+        font-size: 16px;
+        text-align: center;
+        padding: 0;
+        width: 40px;
+        min-height: 36px;
+        float: left;
+        border-radius: $--border-radius-base;
+        padding: 2px;
+        transition: font-size 0.3s;
+
+        &:hover {
+            font-size: 22px;
+        }
+    }
+}

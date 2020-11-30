@@ -1,57 +1,59 @@
 <script>
-  import TabNav from './tab-nav';
+import TabNav from './tab-nav';
 
-  export default {
+export default {
     name: 'ElTabs',
 
     components: {
-      TabNav
+        TabNav
     },
 
     props: {
-      type: String,
-      activeName: String,
-      closable: Boolean,
-      addable: Boolean,
-      value: {},
-      editable: Boolean,
-      tabPosition: {
         type: String,
-        default: 'top'
-      },
-      beforeLeave: Function,
-      stretch: Boolean
+        activeName: String,
+        closable: Boolean,
+        addable: Boolean,
+        value: {},
+        editable: Boolean,
+        tabPosition: {
+            type: String,
+            default: 'top',
+        },
+        beforeLeave: Function,
+        stretch: Boolean,
     },
 
     provide() {
-      return {
-        rootTabs: this
-      };
+        return {
+            rootTabs: this,
+        };
     },
 
     data() {
-      return {
-        currentName: this.value || this.activeName,
-        panes: []
-      };
+        return {
+            currentName: this.value || this.activeName,
+            panes: [],
+        };
     },
 
     watch: {
-      activeName(value) {
-        this.setCurrentName(value);
-      },
-      value(value) {
-        this.setCurrentName(value);
-      },
-      currentName(value) {
-        if (this.$refs.nav) {
-          this.$nextTick(() => {
-            this.$refs.nav.$nextTick(_ => {
-              this.$refs.nav.scrollToActiveTab();
-            });
-          });
-        }
-      }
+        activeName(value) {
+            this.setCurrentName(value);
+        },
+
+        value(value) {
+            this.setCurrentName(value);
+        },
+
+        currentName(value) {
+            if (this.$refs.nav) {
+                this.$nextTick(() => {
+                    this.$refs.nav.$nextTick(_ => {
+                        this.$refs.nav.scrollToActiveTab();
+                    });
+                });
+            }
+        },
     },
 
     methods: {
@@ -69,21 +71,27 @@
           this.panes = [];
         }
       },
-      handleTabClick(tab, tabName, event) {
-        if (tab.disabled) return;
-        this.setCurrentName(tabName);
-        this.$emit('tab-click', tab, event);
-      },
+
+        handleTabClick(tab, tabName, event) {
+            if (tab.disabled) {
+                return;
+            }
+            this.setCurrentName(tabName);
+            this.$emit('tab-click', tab, event);
+        },
+
       handleTabRemove(pane, ev) {
         if (pane.disabled) return;
         ev.stopPropagation();
         this.$emit('edit', pane.name, 'remove');
         this.$emit('tab-remove', pane.name);
       },
+
       handleTabAdd() {
         this.$emit('edit', null, 'add');
         this.$emit('tab-add');
       },
+      
       setCurrentName(value) {
         const changeCurrentName = () => {
           this.currentName = value;
@@ -171,7 +179,7 @@
         </div>
       );
     },
-  
+
     created() {
       if (!this.currentName) {
         this.setCurrentName('0');
@@ -187,5 +195,5 @@
     updated() {
       this.calcPaneInstances();
     }
-  };
+};
 </script>

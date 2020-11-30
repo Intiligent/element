@@ -339,6 +339,7 @@ export default {
         this.root = this.store.root;
 
         let dragState = this.dragState;
+        
         this.$on('tree-node-drag-start', (event, treeNode) => {
             if (typeof this.allowDrag === 'function' && !this.allowDrag(treeNode.node)) {
                 event.preventDefault();
