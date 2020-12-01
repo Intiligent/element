@@ -32,7 +32,7 @@ export default {
 export default {
     data() {
         return {
-            input: 'el-icon-phone',
+            input: 'icon-phone',
         };
     },
 }
@@ -71,11 +71,11 @@ export default {
 export default {
     data() {
         return {
-            input1: 'el-icon-reading',
-            input2: 'el-icon-reading',
-            input3: 'el-icon-reading',
-            input4: 'el-icon-reading',
-            input5: 'el-icon-reading',
+            input1: 'icon-reading',
+            input2: 'icon-reading',
+            input3: 'icon-reading',
+            input4: 'icon-reading',
+            input5: 'icon-reading',
         };
     },
 }
