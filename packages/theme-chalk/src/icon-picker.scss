@@ -7,25 +7,31 @@
         text-align: center;
         padding-left: 0;
         padding-right: 0;
-        width: $--input-medium-height;
+        min-width: $--input-medium-height;
     }
 
-    .el-input--small {
+    .el-input--large {
         .el-input-group__prepend {
-            width: $--input-small-height;
+            font-size: $--input-large-font-size;
+            min-width: $--input-large-height;
         }
     }
-
+    .el-input--small {
+        .el-input-group__prepend {
+            font-size: $--input-small-font-size;
+            min-width: $--input-small-height;
+        }
+    }
     .el-input--mini {
         .el-input-group__prepend {
-            width: $--input-mini-height;
+            font-size: $--input-mini-font-size;
+            min-width: $--input-mini-height;
         }
     }
 }
 
 @include b(icon-picker-popper) {
     li {
-        font-size: 16px;
         text-align: center;
         padding: 0;
         width: 40px;

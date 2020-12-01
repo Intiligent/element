@@ -1,6 +1,6 @@
 #! /bin/sh
 mkdir temp_web
-git config --global user.name "element-vitaliy-bot"
+git config --global user.name "Vitaliy Artyukh"
 git config --global user.email "vitaliy.artyukh@gmail.com"
 
 if [ "$ROT_TOKEN" = "" ]; then
