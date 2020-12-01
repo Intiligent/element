@@ -1,6 +1,5 @@
 <template>
     <el-autocomplete
-        ref="input"
         class="el-iconpicker"
         popper-class="el-iconpicker-popper"
         :value="currentValue"
@@ -1228,15 +1227,10 @@ export default {
     },
 
     methods: {
-        focus() {
-            this.$refs.input.focus();
-        },
-        blur() {
-            this.$refs.input.blur();
-        },
         handleInput(value) {
             this.searchQuery = value;
             this.currentValue = value;
+            this.$emit('input', value);
         },
         handleSelect(value) {
             this.currentValue = value.name;

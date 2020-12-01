@@ -141,64 +141,68 @@ Only card type Tabs support addable & closeable.
 
 :::demo
 ```html
-<el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
-  <el-tab-pane
-    v-for="(item, index) in editableTabs"
-    :key="item.name"
-    :label="item.title"
-    :name="item.name"
-  >
-    {{item.content}}
-  </el-tab-pane>
+<el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit" @change="handleChange">
+    <el-tab-pane
+        v-for="(item, index) in editableTabs"
+        :key="item.name"
+        :label="item.title"
+        :name="item.name"
+    >
+        {{item.content}}
+    </el-tab-pane>
 </el-tabs>
+
 <script>
-  export default {
+export default {
     data() {
-      return {
-        editableTabsValue: '2',
-        editableTabs: [{
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        }, {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        }],
-        tabIndex: 2
-      }
+        return {
+            editableTabsValue: '2',
+            editableTabs: [{
+                title: 'Tab 1',
+                name: '1',
+                content: 'Tab 1 content'
+            }, {
+                title: 'Tab 2',
+                name: '2',
+                content: 'Tab 2 content'
+            }],
+            tabIndex: 2,
+        }
     },
     methods: {
-      handleTabsEdit(targetName, action) {
-        if (action === 'add') {
-          let newTabName = ++this.tabIndex + '';
-          this.editableTabs.push({
-            title: 'New Tab',
-            name: newTabName,
-            content: 'New Tab content'
-          });
-          this.editableTabsValue = newTabName;
-        }
-        if (action === 'remove') {
-          let tabs = this.editableTabs;
-          let activeName = this.editableTabsValue;
-          if (activeName === targetName) {
-            tabs.forEach((tab, index) => {
-              if (tab.name === targetName) {
-                let nextTab = tabs[index + 1] || tabs[index - 1];
-                if (nextTab) {
-                  activeName = nextTab.name;
+        handleChange: function(currentName) {
+            console.log('change:', currentName);
+        },
+
+        handleTabsEdit(targetName, action) {
+            if (action === 'add') {
+              let newTabName = ++this.tabIndex + '';
+              this.editableTabs.push({
+                title: 'New Tab',
+                name: newTabName,
+                content: 'New Tab content'
+              });
+              this.editableTabsValue = newTabName;
+            }
+            if (action === 'remove') {
+                let tabs = this.editableTabs;
+                let activeName = this.editableTabsValue;
+                if (activeName === targetName) {
+                    tabs.forEach((tab, index) => {
+                        if (tab.name === targetName) {
+                            let nextTab = tabs[index + 1] || tabs[index - 1];
+                            if (nextTab) {
+                                activeName = nextTab.name;
+                            }
+                        }
+                    });
                 }
-              }
-            });
-          }
-          
-          this.editableTabsValue = activeName;
-          this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+                this.editableTabsValue = activeName;
+                this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+            }
         }
-      }
     }
-  }
+}
 </script>
 ```
 :::
@@ -265,7 +269,7 @@ Only card type Tabs support addable & closeable.
             }
           });
         }
-        
+
         this.editableTabsValue = activeName;
         this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }
@@ -290,6 +294,7 @@ Only card type Tabs support addable & closeable.
 ### Tabs Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
+| change  | triggers when a tab is clicked, added new, remove current | (currentName) |
 | tab-click  | triggers when a tab is clicked | clicked tab |
 | tab-remove  | triggers when tab-remove button is clicked | name of the removed tab |
 | tab-add  | triggers when tab-add button is clicked  | — |

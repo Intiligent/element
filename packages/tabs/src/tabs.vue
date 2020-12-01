@@ -50,6 +50,7 @@ export default {
                 this.$nextTick(() => {
                     this.$refs.nav.$nextTick(_ => {
                         this.$refs.nav.scrollToActiveTab();
+                        this.$emit('change', value);
                     });
                 });
             }
@@ -57,20 +58,20 @@ export default {
     },
 
     methods: {
-      calcPaneInstances(isForceUpdate = false) {
-        if (this.$slots.default) {
-          const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
-            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
-          // update indeed
-          const panes = paneSlots.map(({ componentInstance }) => componentInstance);
-          const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]));
-          if (isForceUpdate || panesChanged) {
-            this.panes = panes;
-          }
-        } else if (this.panes.length !== 0) {
-          this.panes = [];
-        }
-      },
+        calcPaneInstances(isForceUpdate = false) {
+            if (this.$slots.default) {
+                const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
+                vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
+                // update indeed
+                const panes = paneSlots.map(({ componentInstance }) => componentInstance);
+                const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]));
+                if (isForceUpdate || panesChanged) {
+                    this.panes = panes;
+                }
+            } else if (this.panes.length !== 0) {
+                this.panes = [];
+            }
+        },
 
         handleTabClick(tab, tabName, event) {
             if (tab.disabled) {
@@ -80,18 +81,18 @@ export default {
             this.$emit('tab-click', tab, event);
         },
 
-      handleTabRemove(pane, ev) {
-        if (pane.disabled) return;
-        ev.stopPropagation();
-        this.$emit('edit', pane.name, 'remove');
-        this.$emit('tab-remove', pane.name);
-      },
+        handleTabRemove(pane, ev) {
+            if (pane.disabled) return;
+            ev.stopPropagation();
+            this.$emit('edit', pane.name, 'remove');
+            this.$emit('tab-remove', pane.name);
+        },
 
-      handleTabAdd() {
-        this.$emit('edit', null, 'add');
-        this.$emit('tab-add');
-      },
-      
+        handleTabAdd() {
+            this.$emit('edit', null, 'add');
+            this.$emit('tab-add');
+        },
+
       setCurrentName(value) {
         const changeCurrentName = () => {
           this.currentName = value;
