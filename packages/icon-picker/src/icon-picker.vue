@@ -1,8 +1,8 @@
 <template>
     <el-autocomplete
         ref="input"
-        class="el-icon-picker"
-        popper-class="el-icon-picker-popper"
+        class="el-iconpicker"
+        popper-class="el-iconpicker-popper"
         :value="currentValue"
         :name="name"
         :size="inputIconpickerSize"

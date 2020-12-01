@@ -2,7 +2,7 @@
 @import "common/var";
 @import "./autocomplete.scss";
 
-@include b(icon-picker) {
+@include b(iconpicker) {
     .el-input-group__prepend {
         text-align: center;
         padding-left: 0;
@@ -30,7 +30,7 @@
     }
 }
 
-@include b(icon-picker-popper) {
+@include b(iconpicker-popper) {
     li {
         text-align: center;
         padding: 0;
