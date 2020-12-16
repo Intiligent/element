@@ -91,14 +91,12 @@ export default {
             }
             this.$el.style.backgroundColor = this.hoverBackground;
         },
-
         onMouseLeave() {
             if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) {
                 return;
             }
             this.$el.style.backgroundColor = this.backgroundColor;
         },
-
         handleClick() {
             if (!this.disabled) {
                 this.dispatch('ElMenu', 'item-click', this);
@@ -111,7 +109,7 @@ export default {
         this.parentMenu.addItem(this);
         this.rootMenu.addItem(this);
     },
-
+    
     beforeDestroy() {
         this.parentMenu.removeItem(this);
         this.rootMenu.removeItem(this);
