@@ -36,11 +36,57 @@ Alert interrupts user operation until the user confirms.
 ```
 :::
 
+### Nested message box
+
+Alert interrupts user operation until the user confirms.
+
+:::demo Open an alert by calling the `$alert` method. It simulates the system's `alert`, and cannot be closed by pressing ESC or clicking outside the box. In this example, two parameters `message` and `title` are received. It is worth mentioning that when the box is closed, it returns a `Promise` object for further processing. If you are not sure if your target browsers support `Promise`, you should import a third party polyfill or use callbacks instead like this example.
+
+```html
+<template>
+  <el-button type="text" @click="open">Click to open the Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open() {
+        this.$confirm('This is a message', 'Title', {
+          confirmButtonText: 'OK',
+          // stack: true,
+          // callback: action => {
+          //   this.$message({
+          //     type: 'info',
+          //     message: `action: ${ action }`
+          //   });
+          // }
+        });
+
+        setTimeout(() => {
+            this.$confirm('This is a message2', 'Title', {
+                confirmButtonText: 'OK',
+                stack: true,
+                // callback: action => {
+                //   this.$message({
+                //     type: 'info',
+                //     message: `action: ${ action }`
+                //   });
+                // }
+            });
+        }, 2000);
+
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Confirm
 
 Confirm is used to ask users' confirmation.
 
-:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and it's value can be `success`, `error`, `info` and `warning`. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing. 
+:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and it's value can be `success`, `error`, `info` and `warning`. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing.
 
 ```html
 <template>
