@@ -161,6 +161,7 @@ export default {
         <div class={['el-tabs__header', `is-${tabPosition}`]}>
           {newButton}
           <tab-nav { ...navData }></tab-nav>
+          {this.$slots.header}
         </div>
       );
       const panels = (

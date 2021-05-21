@@ -34,6 +34,41 @@ Basic and concise tabs.
 ```
 :::
 
+### Slot usage
+
+Basic and concise tabs.
+
+:::demo Tabs provide a selective card functionality. By default the first tab is selected as active, and you can activate any tab by setting the `value` attribute.
+
+```html
+<template>
+  <el-tabs tab-position="left" v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="User" name="first">User</el-tab-pane>
+    <el-tab-pane label="Config" name="second">Config</el-tab-pane>
+    <el-tab-pane label="Role" name="third">Role</el-tab-pane>
+    <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
+    <div class="" slot="header">
+        <el-button>Add new +</el-button>
+    </div>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Card Style
 
 Tabs styled as cards.
